@@ -14,7 +14,12 @@
 
 import Dispatch
 import Foundation
+
+#if SWIFT_PACKAGE
+import TomorrowlandPrivate
+#else
 import Tomorrowland.Private
+#endif
 
 extension Promise {
     /// Returns a `Promise` that fulfills with the given value after a delay.

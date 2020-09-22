@@ -12,7 +12,11 @@
 //  except according to those terms.
 //
 
+#if SWIFT_PACKAGE
+import TomorrowlandPrivate
+#else
 import Tomorrowland.Private
+#endif
 
 /// Waits on an array of `Promise`s and returns a `Promise` that is fulfilled with an array of the
 /// resulting fulfilled values.

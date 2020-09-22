@@ -12,7 +12,12 @@
 //  except according to those terms.
 //
 
+#if SWIFT_PACKAGE
+import TomorrowlandPrivate
+#else
 import Tomorrowland.Private
+#endif
+
 import Dispatch
 
 /// The context in which a Promise body or callback is evaluated.
@@ -1849,12 +1854,14 @@ public struct PromiseInvalidationToken: CustomStringConvertible, CustomDebugStri
     public func requestCancelOnInvalidate<V,E>(_ promise: Promise<V,E>) {
         box.requestCancelOnInvalidate(promise.cancellable)
     }
-    
+
+#if !SWIFT_PACKAGE
     /// Registers an `ObjCPromise` to be requested to cancel automatically when the token is
     /// invalidated.
     public func requestCancelOnInvalidate<V,E>(_ promise: ObjCPromise<V,E>) {
         box.requestCancelOnInvalidate(PromiseCancellable(promise.cancellable))
     }
+#endif
     
     /// Invalidates the token whenever another token is invalidated.
     ///
@@ -2540,4 +2547,16 @@ private func replace<T>(_ slot: inout T, with value: T) -> T {
     var value = value
     swap(&slot, &value)
     return value
+}
+
+/// A protocol that can be used to cancel a promise without holding onto the full promise.
+///
+/// This protocol is used by the return type of \c TWLPromise.cancellable and should always be used
+/// instead of holding onto the promise weakly. This allows you to cancel a promise without
+/// interfering with automatic cancel propagation.
+///
+/// This protocol should be held weakly.
+@objc public protocol TWLCancellable {
+/// Requests cancellation of the promise this \c TWLCancellable was created from.
+    func requestCancel()
 }

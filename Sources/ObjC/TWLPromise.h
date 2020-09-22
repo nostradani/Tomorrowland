@@ -690,16 +690,6 @@ NS_SWIFT_NAME(ObjCPromise)
 
 @end
 
-/// A protocol that can be used to cancel a promise without holding onto the full promise.
-///
-/// This protocol is used by the return type of \c TWLPromise.cancellable and should always be used
-/// instead of holding onto the promise weakly. This allows you to cancel a promise without
-/// interfering with automatic cancel propagation.
-///
-/// This protocol should be held weakly.
-@protocol TWLCancellable <NSObject>
-/// Requests cancellation of the promise this \c TWLCancellable was created from.
-- (void)requestCancel;
-@end
+
 
 NS_ASSUME_NONNULL_END

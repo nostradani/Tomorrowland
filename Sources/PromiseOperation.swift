@@ -12,7 +12,11 @@
 //  except according to those terms.
 //
 
+#if SWIFT_PACKAGE
+import TomorrowlandPrivate
+#else
 import Tomorrowland.Private
+#endif
 
 /// `StdPromiseOperation` is an alias for a `PromiseOperation` whose error type is `Swift.Error`.
 public typealias StdPromiseOperation<Value> = PromiseOperation<Value,Swift.Error>

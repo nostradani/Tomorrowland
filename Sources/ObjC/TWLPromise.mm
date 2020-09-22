@@ -19,6 +19,9 @@
 #import <objc/runtime.h>
 #import "objc_cast.h"
 
+@interface TWLObjCPromiseBox (TWLCancellable) <TWLCancellable>
+@end
+
 @interface TWLResolver<ValueType,ErrorType> () {
 @public
     TWLObjCPromiseBox<ValueType,ErrorType> * _Nonnull _box;

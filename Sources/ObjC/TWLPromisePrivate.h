@@ -22,7 +22,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TWLObjCPromiseBox<ValueType,ErrorType> : TWLPromiseBox <TWLCancellable>
+@interface TWLObjCPromiseBox<ValueType,ErrorType> : TWLPromiseBox
 #if __cplusplus
 @property (atomic, readonly) std::tuple<BOOL,ValueType _Nullable,ErrorType _Nullable> result;
 #endif
